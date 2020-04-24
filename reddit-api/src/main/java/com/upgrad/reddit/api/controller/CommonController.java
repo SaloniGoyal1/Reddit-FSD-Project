@@ -27,9 +27,10 @@ public class CommonController {
      * @throws AuthorizationFailedException
      */
 
-    @GetMapping("/userprofile/{userId}")
+    @RequestMapping(method = RequestMethod.GET, path = "/userprofile/{userId}", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     public ResponseEntity<UserDetailsResponse> getUserProfile(@PathVariable("userId") String userId,@RequestHeader(value="Authorization") String authorization) throws AuthorizationFailedException,UserNotFoundException {
         UserEntity user=commonBusinessService.getUser(userId,authorization);
+
         UserDetailsResponse userDetailsResponse=new UserDetailsResponse();
         userDetailsResponse.setUserName(user.getUserName());
         userDetailsResponse.setFirstName(user.getFirstName());
@@ -39,6 +40,7 @@ public class CommonController {
         userDetailsResponse.setCountry(user.getCountry());
         userDetailsResponse.setAboutMe(user.getAboutMe());
         userDetailsResponse.setContactNumber(user.getContactNumber());
+
         return new ResponseEntity<>(userDetailsResponse,HttpStatus.OK);
     }
 

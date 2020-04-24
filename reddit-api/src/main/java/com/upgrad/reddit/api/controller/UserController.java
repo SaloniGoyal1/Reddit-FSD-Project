@@ -35,21 +35,22 @@ public class UserController {
      */
 
     @RequestMapping (method= RequestMethod. POST, path= "/signup" , consumes=MediaType. APPLICATION_JSON_UTF8_VALUE , produces=MediaType. APPLICATION_JSON_UTF8_VALUE )
-    public ResponseEntity<SignupUserResponse> signup(@RequestBody SignupUserRequest signupUserRequest) throws SignUpRestrictedException {
+    public ResponseEntity<SignupUserResponse> signup(final SignupUserRequest signupUserRequest) throws SignUpRestrictedException {
         final UserEntity userEntity=new UserEntity();
-        userEntity.setId(1);
+
         userEntity.setUuid(UUID.randomUUID().toString());
         userEntity.setFirstName(signupUserRequest.getFirstName());
         userEntity.setLastName(signupUserRequest.getLastName());
-        userEntity.setUserName("username");
+        userEntity.setUserName(signupUserRequest.getUserName());
         userEntity.setEmail(signupUserRequest.getEmailAddress());
         userEntity.setPassword(signupUserRequest.getPassword());
-        userEntity.setSalt("123abc");
+        userEntity.setSalt("123@4");
         userEntity.setCountry(signupUserRequest.getCountry());
         userEntity.setAboutMe(signupUserRequest.getAboutMe());
         userEntity.setDob(signupUserRequest.getDob());
         userEntity.setRole("user");
         userEntity.setContactNumber(signupUserRequest.getContactNumber());
+
         final UserEntity createdUserEntity=userBusinessService.signup(userEntity);
         SignupUserResponse userResponse=new SignupUserResponse().id(createdUserEntity.getUuid()).status("USER SUCCESSFULLY REGISTERED");
         return new ResponseEntity<SignupUserResponse>(userResponse,HttpStatus.CREATED);

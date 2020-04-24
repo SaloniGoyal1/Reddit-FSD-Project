@@ -3,10 +3,12 @@ package com.upgrad.reddit.service.dao;
 import com.upgrad.reddit.service.entity.UserAuthEntity;
 import com.upgrad.reddit.service.entity.UserEntity;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
+import java.time.ZonedDateTime;
 
 /**
  * UserDao class provides the database access for all the endpoints in user controller.
@@ -21,6 +23,12 @@ public class UserDao {
     public UserEntity createUser(UserEntity userEntity) {
         entityManager.persist(userEntity);
         return userEntity;
+    }
+
+    @Transactional
+    public UserAuthEntity signOut(UserAuthEntity userAuthEntity){
+        userAuthEntity.setLogoutAt(ZonedDateTime.now());
+        return userAuthEntity;
     }
 
     public UserEntity getUserByUsername(String username) {
