@@ -15,6 +15,7 @@ import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.TypedQuery;
+import java.time.ZonedDateTime;
 
 @Service
 public class PostBusinessService {
@@ -30,9 +31,16 @@ public class PostBusinessService {
      * The method implements the business logic for createPost endpoint.
      */
     @Transactional(propagation = Propagation.REQUIRED)
-    public PostEntity createPost(PostEntity postEntity, String authorization) throws AuthorizationFailedException {
+    public PostEntity createPost(com.upgrad.reddit.api.model.PostRequest postEntity, String authorization) throws AuthorizationFailedException {
 
         UserAuthEntity userAuthEntity = userDao.getUserAuthByAccesstoken(authorization);
+        if(userAuthEntity != null){
+            ZonedDateTime logout = userAuthEntity.getLogoutAt();
+            if (logout != null) {
+                throw new AuthorizationFailedException("ATHR-002", "User is signed out.Sign in first to post a post");
+            }
+        }
+        throw new AuthorizationFailedException("ATHR-001", "User has not signed in");
     }
 
     /**
@@ -41,15 +49,23 @@ public class PostBusinessService {
     public TypedQuery<PostEntity> getPosts(String authorization) throws AuthorizationFailedException {
 
         UserAuthEntity userAuthEntity = userDao.getUserAuthByAccesstoken(authorization);
+        if(userAuthEntity != null){
+            ZonedDateTime logout = userAuthEntity.getLogoutAt();
+            if (logout != null) {
+                throw new AuthorizationFailedException("ATHR-002", "User is signed out.Sign in first to get all posts");
+            }
+        }
+        throw new AuthorizationFailedException("ATHR-001", "User has not signed in");
     }
 
     /**
      * The method implements the business logic for editPostContent endpoint.
      */
     @Transactional(propagation = Propagation.REQUIRED)
-    public PostEntity editPostContent(PostEntity postEntity, String postId, String authorization) throws AuthorizationFailedException, InvalidPostException {
+    public PostEntity editPostContent(com.upgrad.reddit.api.model.PostEditRequest postEntity, String postId, String authorization) throws AuthorizationFailedException, InvalidPostException {
         UserAuthEntity userAuthEntity = userDao.getUserAuthByAccesstoken(authorization);
 
+        return null;
     }
 
     /**
@@ -59,6 +75,7 @@ public class PostBusinessService {
     public PostEntity deletePost(String postId, String authorization) throws AuthorizationFailedException, InvalidPostException {
         UserAuthEntity userAuthEntity = userDao.getUserAuthByAccesstoken(authorization);
 
+        return null;
     }
 
     /**
@@ -66,6 +83,8 @@ public class PostBusinessService {
      */
     public TypedQuery<PostEntity> getPostsByUser(String userId, String authorization) throws AuthorizationFailedException, UserNotFoundException {
         UserAuthEntity userAuthEntity = userDao.getUserAuthByAccesstoken(authorization);
+
+        return null;
     }
 
 }

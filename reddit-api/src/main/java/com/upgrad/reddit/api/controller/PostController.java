@@ -12,10 +12,7 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.time.ZonedDateTime;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.UUID;
 
 @RequestMapping("/post")
 public class PostController {
@@ -32,6 +29,13 @@ public class PostController {
      * @throws AuthorizationFailedException
      */
 
+    @RequestMapping (method= RequestMethod.POST, path= "/post/create" , consumes=MediaType. APPLICATION_JSON_UTF8_VALUE , produces=MediaType. APPLICATION_JSON_UTF8_VALUE )
+    public ResponseEntity<PostResponse> createPost(final PostRequest postRequest, @RequestHeader("authorization") final String authorization)throws AuthorizationFailedException{
+        final PostEntity postEntity = postBusinessService.createPost(postRequest, authorization);
+        PostResponse postResponse = new PostResponse().id(postEntity.getUuid()).status("POST CREATED");
+        return new ResponseEntity<PostResponse>(postResponse, HttpStatus.CREATED);
+    }
+
     /**
      * A controller method to fetch all the posts from the database.
      *
@@ -40,16 +44,30 @@ public class PostController {
      * @throws AuthorizationFailedException
      */
 
-    /**
-     * A controller method to edit the post in the database.
-     *
-     * @param postEditRequest - This argument contains all the attributes required to edit the post details in the database.
-     * @param postId          - The uuid of the post to be edited in the database.
-     * @param authorization       - A field in the request header which contains the JWT token.
-     * @return - ResponseEntity<PostEditResponse> type object along with Http status OK.
-     * @throws AuthorizationFailedException
-     * @throws InvalidPostException
-     */
+    @RequestMapping(method = RequestMethod.GET, path = "/post/all", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+    public ResponseEntity<List<PostDetailsResponse>> getAllPosts (@RequestHeader(value="authorization") String authorization) throws AuthorizationFailedException {
+        final PostEntity postEntity = (PostEntity) postBusinessService.getPosts(authorization);
+        PostDetailsResponse postDetailsResponse = new PostDetailsResponse().id(postEntity.getUuid()).content(postEntity.getContent());
+        return new ResponseEntity<List<PostDetailsResponse>>((List<PostDetailsResponse>) postDetailsResponse,HttpStatus.OK);
+    }
+
+        /**
+         * A controller method to edit the post in the database.
+         *
+         * @param postEditRequest - This argument contains all the attributes required to edit the post details in the database.
+         * @param postId          - The uuid of the post to be edited in the database.
+         * @param authorization       - A field in the request header which contains the JWT token.
+         * @return - ResponseEntity<PostEditResponse> type object along with Http status OK.
+         * @throws AuthorizationFailedException
+         * @throws InvalidPostException
+         */
+
+        @RequestMapping (method= RequestMethod.PUT, path= "/post/edit/{postId}" , consumes=MediaType. APPLICATION_JSON_UTF8_VALUE , produces=MediaType. APPLICATION_JSON_UTF8_VALUE )
+        public ResponseEntity<PostEditResponse> editPostContent(final PostEditRequest postEditRequest, @PathVariable("postId") String postId, @RequestHeader("authorization") final String authorization)throws AuthorizationFailedException, InvalidPostException{
+            final PostEntity postEntity = postBusinessService.editPostContent(postEditRequest, postId, authorization);
+            PostEditResponse postEditResponse = new PostEditResponse().id(postEntity.getUuid()).status("POST EDITED");
+            return new ResponseEntity<PostEditResponse>(postEditResponse, HttpStatus.OK);
+        }
 
     /**
      * A controller method to delete the post in the database.
@@ -61,6 +79,13 @@ public class PostController {
      * @throws InvalidPostException
      */
 
+    @RequestMapping (method= RequestMethod.DELETE, path= "/post/delete/{postId}" , consumes=MediaType. APPLICATION_JSON_UTF8_VALUE , produces=MediaType. APPLICATION_JSON_UTF8_VALUE )
+    public ResponseEntity<PostDeleteResponse> deletePost (@PathVariable("postId") String postId, @RequestHeader("authorization") final String authorization)throws AuthorizationFailedException, InvalidPostException{
+        final PostEntity postEntity = postBusinessService.deletePost(postId, authorization);
+        PostDeleteResponse postDeleteResponse = new PostDeleteResponse().id(postEntity.getUuid()).status("POST DELETED");
+        return new ResponseEntity<PostDeleteResponse>(postDeleteResponse, HttpStatus.OK);
+    }
+
     /**
      * A controller method to fetch all the posts posted by a specific user.
      *
@@ -71,4 +96,10 @@ public class PostController {
      * @throws UserNotFoundException
      */
 
+    @RequestMapping (method= RequestMethod.GET, path= "post/all/{userId}" , consumes=MediaType. APPLICATION_JSON_UTF8_VALUE , produces=MediaType. APPLICATION_JSON_UTF8_VALUE )
+    public ResponseEntity<List<PostDetailsResponse>> getAllPostsByUser(@PathVariable("userId") String userId, @RequestHeader("authorization") final String authorization)throws AuthorizationFailedException, UserNotFoundException{
+        final PostEntity postEntity = (PostEntity) postBusinessService.getPostsByUser(userId, authorization);
+        PostDetailsResponse postDetailsResponse = new PostDetailsResponse().id(postEntity.getUuid()).content(postEntity.getContent());
+        return new ResponseEntity<List<PostDetailsResponse>>((List<PostDetailsResponse>) postDetailsResponse, HttpStatus.OK);
+    }
 }
