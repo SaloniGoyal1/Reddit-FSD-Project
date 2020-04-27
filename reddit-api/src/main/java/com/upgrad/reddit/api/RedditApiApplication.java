@@ -12,3 +12,10 @@ public class RedditApiApplication {
         SpringApplication.run(RedditApiApplication.class);
     }
 }
+
+
+// mvn clean install -DskipTests
+
+//mvn clean install -Psetup -DskipTests
+
+//http://localhost:8080/api/swagger-ui.html#!/signup-controller/signupUsingPOST
