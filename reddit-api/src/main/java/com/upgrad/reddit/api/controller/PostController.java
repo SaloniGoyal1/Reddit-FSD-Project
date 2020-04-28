@@ -29,12 +29,12 @@ public class PostController {
      * @throws AuthorizationFailedException
      */
 
-//    @RequestMapping (method= RequestMethod.POST, path= "/post/create" , consumes=MediaType. APPLICATION_JSON_UTF8_VALUE , produces=MediaType. APPLICATION_JSON_UTF8_VALUE )
-//    public ResponseEntity<PostResponse> createPost(@RequestBody PostRequest postRequest, @RequestHeader(value="authorization") String authorization) throws AuthorizationFailedException {
-//        PostEntity postEntity = postBusinessService.createPost(postRequest, authorization);
-//        PostResponse postResponse = new PostResponse().id(postEntity.getUuid()).status("POST CREATED");
-//        return new ResponseEntity<PostResponse>(postResponse, HttpStatus.CREATED);
-//    }
+    @RequestMapping (method= RequestMethod.POST, path= "/post/create" , consumes=MediaType. APPLICATION_JSON_UTF8_VALUE , produces=MediaType. APPLICATION_JSON_UTF8_VALUE )
+    public ResponseEntity<PostResponse> createPost(@RequestBody PostEntity postRequest, @RequestHeader(value="authorization") final String authorization) throws AuthorizationFailedException {
+        PostEntity postEntity = postBusinessService.createPost(postRequest, authorization);
+        PostResponse postResponse = new PostResponse().id(postEntity.getUuid()).status("POST CREATED");
+        return new ResponseEntity<PostResponse>(postResponse, HttpStatus.CREATED);
+    }
 
     /**
      * A controller method to fetch all the posts from the database.
@@ -45,7 +45,7 @@ public class PostController {
      */
 
     @RequestMapping(method = RequestMethod.GET, path = "/post/all", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
-    public ResponseEntity<List<PostDetailsResponse>> getAllPosts (@RequestHeader(value="authorization") String authorization) throws AuthorizationFailedException {
+    public ResponseEntity<List<PostDetailsResponse>> getAllPosts (@RequestHeader(value="authorization") final String authorization) throws AuthorizationFailedException {
         final PostEntity postEntity = (PostEntity) postBusinessService.getPosts(authorization);
         PostDetailsResponse postDetailsResponse = new PostDetailsResponse().id(postEntity.getUuid()).content(postEntity.getContent());
         return new ResponseEntity<List<PostDetailsResponse>>((List<PostDetailsResponse>) postDetailsResponse,HttpStatus.OK);
@@ -62,12 +62,12 @@ public class PostController {
          * @throws InvalidPostException
          */
 
-//        @RequestMapping (method= RequestMethod.PUT, path= "/post/edit/{postId}" , consumes=MediaType. APPLICATION_JSON_UTF8_VALUE , produces=MediaType. APPLICATION_JSON_UTF8_VALUE )
-//        public ResponseEntity<PostEditResponse> editPostContent(@RequestBody PostEditRequest postEditRequest, @PathVariable("postId") String postId, @RequestHeader("authorization") final String authorization)throws AuthorizationFailedException, InvalidPostException{
-//            final PostEntity postEntity = postBusinessService.editPostContent(postEditRequest, postId, authorization);
-//            PostEditResponse postEditResponse = new PostEditResponse().id(postEntity.getUuid()).status("POST EDITED");
-//            return new ResponseEntity<PostEditResponse>(postEditResponse, HttpStatus.OK);
-//        }
+        @RequestMapping (method= RequestMethod.PUT, path= "/post/edit/{postId}" , consumes=MediaType. APPLICATION_JSON_UTF8_VALUE , produces=MediaType. APPLICATION_JSON_UTF8_VALUE )
+        public ResponseEntity<PostEditResponse> editPostContent(@RequestBody PostEntity postEditRequest, @PathVariable("postId") String postId, @RequestHeader("authorization") final String authorization)throws AuthorizationFailedException, InvalidPostException{
+            final PostEntity postEntity = postBusinessService.editPostContent(postEditRequest, postId, authorization);
+            PostEditResponse postEditResponse = new PostEditResponse().id(postEntity.getUuid()).status("POST EDITED");
+            return new ResponseEntity<PostEditResponse>(postEditResponse, HttpStatus.OK);
+        }
 
     /**
      * A controller method to delete the post in the database.

@@ -3,17 +3,8 @@
   <component name="ChangeListManager">
     <list default="true" id="6c1033fd-a60d-4d6e-a40e-98c8f172c921" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/reddit-api/src/main/java/com/upgrad/reddit/api/RedditApiApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/reddit-api/src/main/java/com/upgrad/reddit/api/RedditApiApplication.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/reddit-api/src/main/java/com/upgrad/reddit/api/controller/CommentController.java" beforeDir="false" afterPath="$PROJECT_DIR$/reddit-api/src/main/java/com/upgrad/reddit/api/controller/CommentController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/reddit-api/src/main/java/com/upgrad/reddit/api/controller/PostController.java" beforeDir="false" afterPath="$PROJECT_DIR$/reddit-api/src/main/java/com/upgrad/reddit/api/controller/PostController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/reddit-api/target/classes/.swagger-codegen-ignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/reddit-api/target/classes/.swagger-codegen/VERSION" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/reddit-api/target/classes/README.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/reddit-api/target/classes/com/upgrad/reddit/api/controller/CommonController.class" beforeDir="false" afterPath="$PROJECT_DIR$/reddit-api/target/classes/com/upgrad/reddit/api/controller/CommonController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/reddit-api/target/classes/com/upgrad/reddit/api/controller/PostController.class" beforeDir="false" afterPath="$PROJECT_DIR$/reddit-api/target/classes/com/upgrad/reddit/api/controller/PostController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/reddit-api/target/classes/pom.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/reddit-api/target/classes/src/main/resources/application.properties" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/reddit-api/target/generated-sources/com/upgrad/reddit/api/model/CommentDeleteResponse.java" beforeDir="false" afterPath="$PROJECT_DIR$/reddit-api/target/generated-sources/com/upgrad/reddit/api/model/CommentDeleteResponse.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/reddit-api/target/generated-sources/com/upgrad/reddit/api/model/CommentDetailsResponse.java" beforeDir="false" afterPath="$PROJECT_DIR$/reddit-api/target/generated-sources/com/upgrad/reddit/api/model/CommentDetailsResponse.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/reddit-api/target/generated-sources/com/upgrad/reddit/api/model/CommentEditRequest.java" beforeDir="false" afterPath="$PROJECT_DIR$/reddit-api/target/generated-sources/com/upgrad/reddit/api/model/CommentEditRequest.java" afterDir="false" />
@@ -39,12 +30,8 @@
       <change beforePath="$PROJECT_DIR$/reddit-api/target/generated-sources/io/swagger/api/NotFoundException.java" beforeDir="false" afterPath="$PROJECT_DIR$/reddit-api/target/generated-sources/io/swagger/api/NotFoundException.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/reddit-api/target/generated-sources/io/swagger/configuration/SwaggerDocumentationConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/reddit-api/target/generated-sources/io/swagger/configuration/SwaggerDocumentationConfig.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/reddit-api/target/reddit-api-1.0-SNAPSHOT.jar" beforeDir="false" afterPath="$PROJECT_DIR$/reddit-api/target/reddit-api-1.0-SNAPSHOT.jar" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/reddit-db/target/reddit-db.jar" beforeDir="false" afterPath="$PROJECT_DIR$/reddit-db/target/reddit-db.jar" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/reddit-service/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/reddit-service/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/reddit-service/src/main/java/com/upgrad/reddit/service/business/AdminBusinessService.java" beforeDir="false" afterPath="$PROJECT_DIR$/reddit-service/src/main/java/com/upgrad/reddit/service/business/AdminBusinessService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/reddit-service/src/main/java/com/upgrad/reddit/service/business/CommentBusinessService.java" beforeDir="false" afterPath="$PROJECT_DIR$/reddit-service/src/main/java/com/upgrad/reddit/service/business/CommentBusinessService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/reddit-service/src/main/java/com/upgrad/reddit/service/business/PostBusinessService.java" beforeDir="false" afterPath="$PROJECT_DIR$/reddit-service/src/main/java/com/upgrad/reddit/service/business/PostBusinessService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/reddit-service/target/classes/com/upgrad/reddit/service/business/CommentBusinessService.class" beforeDir="false" afterPath="$PROJECT_DIR$/reddit-service/target/classes/com/upgrad/reddit/service/business/CommentBusinessService.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/reddit-service/target/classes/com/upgrad/reddit/service/business/PostBusinessService.class" beforeDir="false" afterPath="$PROJECT_DIR$/reddit-service/target/classes/com/upgrad/reddit/service/business/PostBusinessService.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/reddit-service/target/reddit-service-1.0-SNAPSHOT.jar" beforeDir="false" afterPath="$PROJECT_DIR$/reddit-service/target/reddit-service-1.0-SNAPSHOT.jar" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -159,6 +146,10 @@
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="380" y="0" width="619" height="728" key="#RedditApiApplication/0.0.1366.728@0.0.1366.728" timestamp="1587732067103" />
+    <state x="413" y="111" key="#com.intellij.refactoring.typeMigration.ui.FailedConversionsDialog" timestamp="1588051517004">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state x="413" y="111" key="#com.intellij.refactoring.typeMigration.ui.FailedConversionsDialog/0.0.1366.728@0.0.1366.728" timestamp="1588051517004" />
     <state x="463" y="119" key="FileChooserDialogImpl" timestamp="1587971220268">
       <screen x="0" y="0" width="1366" height="728" />
     </state>

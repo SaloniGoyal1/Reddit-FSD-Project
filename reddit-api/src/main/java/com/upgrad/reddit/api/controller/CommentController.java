@@ -36,12 +36,12 @@ public class CommentController {
      * @throws InvalidPostException
      */
 
-//    @RequestMapping (method= RequestMethod.POST, path= "/comment/create" , consumes=MediaType. APPLICATION_JSON_UTF8_VALUE , produces=MediaType. APPLICATION_JSON_UTF8_VALUE )
-//    public ResponseEntity<CommentResponse> createComment(final CommentRequest commentRequest, @PathVariable("/comment/create") String postId, @RequestHeader("authorization") String authorization)throws AuthorizationFailedException, InvalidPostException{
-//        final CommentEntity commentEntity = commentBusinessService.createComment(commentRequest, postId, authorization);
-//        CommentResponse commentResponse = new CommentResponse().id(commentEntity.getUuid()).status("Comment CREATED");
-//        return new ResponseEntity<CommentResponse>(commentResponse, HttpStatus.CREATED);
-//    }
+    @RequestMapping (method= RequestMethod.POST, path= "/comment/create" , consumes=MediaType. APPLICATION_JSON_UTF8_VALUE , produces=MediaType. APPLICATION_JSON_UTF8_VALUE )
+    public ResponseEntity<CommentResponse> createComment(final CommentEntity commentRequest, @PathVariable("/comment/create") String postId, @RequestHeader("authorization") final String authorization)throws AuthorizationFailedException, InvalidPostException{
+        final CommentEntity commentEntity = commentBusinessService.createComment(commentRequest, postId, authorization);
+        CommentResponse commentResponse = new CommentResponse().id(commentEntity.getUuid()).status("Comment CREATED");
+        return new ResponseEntity<CommentResponse>(commentResponse, HttpStatus.CREATED);
+    }
 
     /**
      * A controller method to edit an comment in the database.
@@ -53,13 +53,13 @@ public class CommentController {
      * @throws AuthorizationFailedException
      * @throws CommentNotFoundException
      */
+    @RequestMapping (method= RequestMethod.PUT, path= "/comment/edit/{commentId}" , consumes=MediaType. APPLICATION_JSON_UTF8_VALUE , produces=MediaType. APPLICATION_JSON_UTF8_VALUE )
+    public ResponseEntity<CommentEditResponse> editCommentContent(final CommentEntity commentEditRequest, @PathVariable("commentId") String commentId, @RequestHeader("authorization") final String authorization)throws AuthorizationFailedException, CommentNotFoundException{
+        final CommentEntity commentEntity = commentBusinessService.editCommentContent(commentEditRequest, commentId, authorization);
+        CommentEditResponse commentEditResponse = new CommentEditResponse().id(commentEntity.getUuid()).status("COMMENT EDITED");
+        return new ResponseEntity<CommentEditResponse>(commentEditResponse, HttpStatus.OK);
+    }
 
-//    @RequestMapping (method= RequestMethod.PUT, path= "/comment/edit/{commentId}" , consumes=MediaType. APPLICATION_JSON_UTF8_VALUE , produces=MediaType. APPLICATION_JSON_UTF8_VALUE )
-//    public ResponseEntity<CommentEditResponse> editCommentContent(final CommentEditRequest commentEditRequest, @PathVariable("commentId") String commentId, @RequestHeader("authorization") String authorization)throws AuthorizationFailedException, CommentNotFoundException{
-//        final CommentEntity commentEntity = commentBusinessService.editCommentContent(commentEditRequest, commentId, authorization);
-//        CommentEditResponse commentEditResponse = new CommentEditResponse().id(commentEntity.getUuid()).status("COMMENT EDITED");
-//        return new ResponseEntity<CommentEditResponse>(commentEditResponse, HttpStatus.OK);
-//    }
     /**
      * A controller method to delete an comment in the database.
      *
@@ -69,12 +69,12 @@ public class CommentController {
      * @throws AuthorizationFailedException
      * @throws CommentNotFoundException
      */
-//    @RequestMapping (method= RequestMethod.DELETE, path= "/comment/delete/{commentId}" , consumes=MediaType. APPLICATION_JSON_UTF8_VALUE , produces=MediaType. APPLICATION_JSON_UTF8_VALUE )
-//    public ResponseEntity<CommentDeleteResponse> deleteComment(@PathVariable("commentId") String commentId, @RequestHeader("authorization") String authorization)throws AuthorizationFailedException, CommentNotFoundException{
-//        final CommentEntity commentEntity = commentBusinessService.deleteComment(commentId, authorization);
-//        CommentDeleteResponse commentDeleteResponse = new CommentDeleteResponse().id(commentEntity.getUuid()).status("COMMENT DELETED");
-//        return new ResponseEntity<CommentDeleteResponse>(commentDeleteResponse, HttpStatus.OK);
-//    }
+    @RequestMapping (method= RequestMethod.DELETE, path= "/comment/delete/{commentId}" , consumes=MediaType. APPLICATION_JSON_UTF8_VALUE , produces=MediaType. APPLICATION_JSON_UTF8_VALUE )
+    public ResponseEntity<CommentDeleteResponse> deleteComment(@PathVariable("commentId") String commentId, @RequestHeader("authorization") final String authorization)throws AuthorizationFailedException, CommentNotFoundException{
+        final CommentEntity commentEntity = commentBusinessService.deleteComment(commentId, authorization);
+        CommentDeleteResponse commentDeleteResponse = new CommentDeleteResponse().id(commentEntity.getUuid()).status("COMMENT DELETED");
+        return new ResponseEntity<CommentDeleteResponse>(commentDeleteResponse, HttpStatus.OK);
+    }
 
     /**
      * A controller method to fetch all the comments for a specific post in the database.
@@ -85,11 +85,13 @@ public class CommentController {
      * @throws AuthorizationFailedException
      * @throws InvalidPostException
      */
-
-//    @RequestMapping(method = RequestMethod.GET, path = "comment/all/{postId}", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
-//    public ResponseEntity<List<CommentDetailsResponse>> getAllCommentsToPost (@PathVariable("postId") String postId, @RequestHeader(value="authorization") String authorization) throws AuthorizationFailedException, InvalidPostException {
-//        final CommentEntity commentEntity = (CommentEntity) commentBusinessService.getCommentsByPost(postId, authorization);
-//        CommentDetailsResponse commentDetailsResponse = new CommentDetailsResponse().id(commentEntity.getUuid()).commentContent(commentEntity.getComment()).getCommentContent();
-//        return new ResponseEntity<List<CommentDetailsResponse>>((List<CommentDetailsResponse>) commentDetailsResponse,HttpStatus.OK);
-//    }
+    @RequestMapping(method = RequestMethod.GET, path = "comment/all/{postId}", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+    public ResponseEntity<List<CommentDetailsResponse>> getAllCommentsToPost (@PathVariable("postId") String postId, @RequestHeader(value="authorization") final String authorization) throws AuthorizationFailedException, InvalidPostException {
+        final CommentEntity commentEntity = (CommentEntity) commentBusinessService.getCommentsByPost(postId, authorization);
+        CommentDetailsResponse commentDetailsResponse = new CommentDetailsResponse();
+        commentDetailsResponse.id(commentEntity.getUuid());
+        commentDetailsResponse.commentContent(commentEntity.getComment());
+        commentDetailsResponse.getCommentContent();
+        return new ResponseEntity<List<CommentDetailsResponse>>((List<CommentDetailsResponse>) commentDetailsResponse,HttpStatus.OK);
+    }
 }

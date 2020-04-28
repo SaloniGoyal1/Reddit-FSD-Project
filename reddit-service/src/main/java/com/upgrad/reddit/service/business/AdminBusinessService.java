@@ -32,7 +32,6 @@ public class AdminBusinessService {
             if (logout != null) {
                 throw new AuthorizationFailedException("ATHR-002", "User is signed out");
             }
-
             UserEntity userEntity = adminDao.getUserByUuid(uuid);
             if (userEntity == null) {
                 throw new UserNotFoundException("USR-001", "User with entered uuid does not exist");
