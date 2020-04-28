@@ -24,17 +24,18 @@ public class CommonBusinessService {
      */
     public UserEntity getUser(String uuid, String authorization) throws UserNotFoundException, AuthorizationFailedException {
         UserAuthEntity userAuthEntity = userDao.getUserAuthByAccesstoken(authorization);
-        if(userAuthEntity != null){
-            ZonedDateTime logout = userAuthEntity.getLogoutAt();
-            if (logout != null) {
-                throw new AuthorizationFailedException("ATHR-002", "User is signed out.Sign in first to get user details");
-            }
+        if (userAuthEntity == null){
+            throw new AuthorizationFailedException("ATHR-001", "User has not signed in");
+        }
+        if(userAuthEntity.getLogoutAt() != null){
+            throw new AuthorizationFailedException("ATHR-002", "User is signed out.Sign in first to get user details");
+        }
+        else {
             UserEntity userEntity = commonDao.getUserByUuid(uuid);
-            if (userEntity == null){
+            if (userEntity == null) {
                 throw new UserNotFoundException("USR-001", "User with entered uuid does not exist");
             }
             return userEntity;
         }
-        throw new AuthorizationFailedException("ATHR-001", "User has not signed in");
     }
 }

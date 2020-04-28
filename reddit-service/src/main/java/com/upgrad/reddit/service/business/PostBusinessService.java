@@ -31,7 +31,6 @@ public class PostBusinessService {
     @Transactional(propagation = Propagation.REQUIRED)
     public PostEntity createPost(PostEntity postEntity, String authorization) throws AuthorizationFailedException {
         UserAuthEntity userAuthEntity = userDao.getUserAuthByAccesstoken(authorization);
-
         if (userAuthEntity == null) {
             throw new AuthorizationFailedException("ATHR-001", "User has not signed in");
         }
@@ -48,7 +47,6 @@ public class PostBusinessService {
      * The method implements the business logic for getAllPosts endpoint.
      */
     public TypedQuery<PostEntity> getPosts(String authorization) throws AuthorizationFailedException {
-
         UserAuthEntity userAuthEntity = userDao.getUserAuthByAccesstoken(authorization);
         if (userAuthEntity == null) {
             throw new AuthorizationFailedException("ATHR-001", "User has not signed in");
@@ -67,7 +65,6 @@ public class PostBusinessService {
     @Transactional(propagation = Propagation.REQUIRED)
     public PostEntity editPostContent(PostEntity postEntity, String postId, String authorization) throws AuthorizationFailedException, InvalidPostException {
         UserAuthEntity userAuthEntity = userDao.getUserAuthByAccesstoken(authorization);
-
         if (userAuthEntity == null) {
             throw new AuthorizationFailedException("ATHR-001", "User has not signed in");
         }
@@ -98,7 +95,6 @@ public class PostBusinessService {
     @Transactional(propagation = Propagation.REQUIRED)
     public PostEntity deletePost(String postId, String authorization) throws AuthorizationFailedException, InvalidPostException {
         UserAuthEntity userAuthEntity = userDao.getUserAuthByAccesstoken(authorization);
-
         if (userAuthEntity == null) {
             throw new AuthorizationFailedException("ATHR-001", "User has not signed in");
         }
@@ -124,7 +120,6 @@ public class PostBusinessService {
      */
     public TypedQuery<PostEntity> getPostsByUser(String userId, String authorization) throws AuthorizationFailedException, UserNotFoundException {
         UserAuthEntity userAuthEntity = userDao.getUserAuthByAccesstoken(authorization);
-
         if (userAuthEntity == null) {
             throw new AuthorizationFailedException("ATHR-001", "User has not signed in");
         }
@@ -141,5 +136,4 @@ public class PostBusinessService {
             }
         }
     }
-
 }

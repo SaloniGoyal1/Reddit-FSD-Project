@@ -32,7 +32,6 @@ public class UserBusinessService {
         String[] encryptedText = passwordCryptographyProvider.encrypt(userEntity.getPassword());
         userEntity.setSalt(encryptedText[0]);
         userEntity.setPassword(encryptedText[1]);
-
         if (userEntity != null) {
             throw new SignUpRestrictedException("SGR-001", "Try any other Username, this Username has already been taken");
         }
@@ -48,20 +47,16 @@ public class UserBusinessService {
      */
     @Transactional(propagation = Propagation.REQUIRED)
     public UserAuthEntity authenticate(String username, String password) throws AuthenticationFailedException {
-
         UserEntity userEntity = userDao.getUserByUsername(username);
-
         if (userEntity == null) {
             throw new AuthenticationFailedException("ATH-001", "This username does not exist");
         }
-
-        //final String encryptedPassword = CryptographyProvider.encrypt(password, userEntity.getSalt());
         if (password.equals(userEntity.getPassword())){
             JwtTokenProvider jwtTokenProvider = new JwtTokenProvider(password);
             UserAuthEntity userAuthEntity = new UserAuthEntity();
             userAuthEntity.setUser(userEntity);
             final ZonedDateTime now = ZonedDateTime.now();
-            final ZonedDateTime expiresAt = now.plusHours(10);
+            final ZonedDateTime expiresAt = now.plusHours(8);
 
             userAuthEntity.setAccessToken(jwtTokenProvider.generateToken(userEntity.getUuid(), now, expiresAt));
             userAuthEntity.setLoginAt(now);
@@ -81,14 +76,10 @@ public class UserBusinessService {
      */
     @Transactional(propagation = Propagation.REQUIRED)
     public UserAuthEntity signout(String authorization) throws SignOutRestrictedException {
-
         UserAuthEntity userAuthEntity = userDao.getUserAuthByAccesstoken(authorization);
-
-        if(userAuthEntity != null){
-            return userDao.signOut(userAuthEntity);
-        }
-        else{
+        if(userAuthEntity == null){
             throw new SignOutRestrictedException("SGR-001", "User is not Signed in");
         }
+        return userDao.signOut(userAuthEntity);
     }
 }

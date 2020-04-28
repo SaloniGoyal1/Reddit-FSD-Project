@@ -12,8 +12,11 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.ZonedDateTime;
 import java.util.List;
+import java.util.UUID;
 
+@RestController
 @RequestMapping("/post")
 public class PostController {
 
@@ -30,8 +33,13 @@ public class PostController {
      */
 
     @RequestMapping (method= RequestMethod.POST, path= "/post/create" , consumes=MediaType. APPLICATION_JSON_UTF8_VALUE , produces=MediaType. APPLICATION_JSON_UTF8_VALUE )
-    public ResponseEntity<PostResponse> createPost(@RequestBody PostEntity postRequest, @RequestHeader(value="authorization") final String authorization) throws AuthorizationFailedException {
-        PostEntity postEntity = postBusinessService.createPost(postRequest, authorization);
+    public ResponseEntity<PostResponse> createPost(@RequestBody PostRequest postRequest, @RequestHeader(value="authorization") final String authorization) throws AuthorizationFailedException {
+        String [] bearerToken = authorization.split("Bearer ");
+        PostEntity postEntity = new PostEntity();
+        postEntity.setUuid(UUID.randomUUID().toString());
+        postEntity.setContent(postRequest.getContent());
+        postEntity.setDate(ZonedDateTime.now());
+        PostEntity postEntity1 = postBusinessService.createPost(postEntity, authorization);
         PostResponse postResponse = new PostResponse().id(postEntity.getUuid()).status("POST CREATED");
         return new ResponseEntity<PostResponse>(postResponse, HttpStatus.CREATED);
     }
@@ -46,7 +54,8 @@ public class PostController {
 
     @RequestMapping(method = RequestMethod.GET, path = "/post/all", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     public ResponseEntity<List<PostDetailsResponse>> getAllPosts (@RequestHeader(value="authorization") final String authorization) throws AuthorizationFailedException {
-        final PostEntity postEntity = (PostEntity) postBusinessService.getPosts(authorization);
+        String [] bearerToken = authorization.split("Bearer ");
+        final PostEntity postEntity = (PostEntity) postBusinessService.getPosts(bearerToken[0]);
         PostDetailsResponse postDetailsResponse = new PostDetailsResponse().id(postEntity.getUuid()).content(postEntity.getContent());
         return new ResponseEntity<List<PostDetailsResponse>>((List<PostDetailsResponse>) postDetailsResponse,HttpStatus.OK);
     }
@@ -63,9 +72,12 @@ public class PostController {
          */
 
         @RequestMapping (method= RequestMethod.PUT, path= "/post/edit/{postId}" , consumes=MediaType. APPLICATION_JSON_UTF8_VALUE , produces=MediaType. APPLICATION_JSON_UTF8_VALUE )
-        public ResponseEntity<PostEditResponse> editPostContent(@RequestBody PostEntity postEditRequest, @PathVariable("postId") String postId, @RequestHeader("authorization") final String authorization)throws AuthorizationFailedException, InvalidPostException{
-            final PostEntity postEntity = postBusinessService.editPostContent(postEditRequest, postId, authorization);
-            PostEditResponse postEditResponse = new PostEditResponse().id(postEntity.getUuid()).status("POST EDITED");
+        public ResponseEntity<PostEditResponse> editPostContent(@RequestBody PostEditRequest postEditRequest, @PathVariable("postId") String postId, @RequestHeader("authorization") final String authorization)throws AuthorizationFailedException, InvalidPostException{
+            String [] bearerToken = authorization.split("Bearer ");
+            final PostEntity postEntity = new PostEntity();
+            postEditRequest.setContent(postEditRequest.getContent());
+            final PostEntity postEntity1 = postBusinessService.editPostContent(postEntity,postId,bearerToken[0]);
+            PostEditResponse postEditResponse = new PostEditResponse().id(postEntity1.getUuid()).status("POST EDITED");
             return new ResponseEntity<PostEditResponse>(postEditResponse, HttpStatus.OK);
         }
 
@@ -81,7 +93,8 @@ public class PostController {
 
     @RequestMapping (method= RequestMethod.DELETE, path= "/post/delete/{postId}" , consumes=MediaType. APPLICATION_JSON_UTF8_VALUE , produces=MediaType. APPLICATION_JSON_UTF8_VALUE )
     public ResponseEntity<PostDeleteResponse> deletePost (@PathVariable("postId") String postId, @RequestHeader("authorization") final String authorization)throws AuthorizationFailedException, InvalidPostException{
-        final PostEntity postEntity = postBusinessService.deletePost(postId, authorization);
+        String [] bearerToken = authorization.split("Bearer ");
+        final PostEntity postEntity = postBusinessService.deletePost(postId, bearerToken[0]);
         PostDeleteResponse postDeleteResponse = new PostDeleteResponse().id(postEntity.getUuid()).status("POST DELETED");
         return new ResponseEntity<PostDeleteResponse>(postDeleteResponse, HttpStatus.OK);
     }
@@ -98,7 +111,8 @@ public class PostController {
 
     @RequestMapping (method= RequestMethod.GET, path= "post/all/{userId}" , consumes=MediaType. APPLICATION_JSON_UTF8_VALUE , produces=MediaType. APPLICATION_JSON_UTF8_VALUE )
     public ResponseEntity<List<PostDetailsResponse>> getAllPostsByUser(@PathVariable("userId") String userId, @RequestHeader("authorization") final String authorization)throws AuthorizationFailedException, UserNotFoundException{
-        final PostEntity postEntity = (PostEntity) postBusinessService.getPostsByUser(userId, authorization);
+        String [] bearerToken = authorization.split("Bearer ");
+        final PostEntity postEntity = (PostEntity) postBusinessService.getPostsByUser(userId, bearerToken[0]);
         PostDetailsResponse postDetailsResponse = new PostDetailsResponse().id(postEntity.getUuid()).content(postEntity.getContent());
         return new ResponseEntity<List<PostDetailsResponse>>((List<PostDetailsResponse>) postDetailsResponse, HttpStatus.OK);
     }

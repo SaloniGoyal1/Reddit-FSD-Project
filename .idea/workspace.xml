@@ -3,8 +3,17 @@
   <component name="ChangeListManager">
     <list default="true" id="6c1033fd-a60d-4d6e-a40e-98c8f172c921" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/reddit-api/src/main/java/com/upgrad/reddit/api/RedditApiApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/reddit-api/src/main/java/com/upgrad/reddit/api/RedditApiApplication.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/reddit-api/src/main/java/com/upgrad/reddit/api/controller/AdminController.java" beforeDir="false" afterPath="$PROJECT_DIR$/reddit-api/src/main/java/com/upgrad/reddit/api/controller/AdminController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/reddit-api/src/main/java/com/upgrad/reddit/api/controller/CommentController.java" beforeDir="false" afterPath="$PROJECT_DIR$/reddit-api/src/main/java/com/upgrad/reddit/api/controller/CommentController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/reddit-api/src/main/java/com/upgrad/reddit/api/controller/CommonController.java" beforeDir="false" afterPath="$PROJECT_DIR$/reddit-api/src/main/java/com/upgrad/reddit/api/controller/CommonController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/reddit-api/src/main/java/com/upgrad/reddit/api/controller/PostController.java" beforeDir="false" afterPath="$PROJECT_DIR$/reddit-api/src/main/java/com/upgrad/reddit/api/controller/PostController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/reddit-api/src/main/java/com/upgrad/reddit/api/controller/UserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/reddit-api/src/main/java/com/upgrad/reddit/api/controller/UserController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/reddit-api/target/classes/com/upgrad/reddit/api/controller/AdminController.class" beforeDir="false" afterPath="$PROJECT_DIR$/reddit-api/target/classes/com/upgrad/reddit/api/controller/AdminController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/reddit-api/target/classes/com/upgrad/reddit/api/controller/CommentController.class" beforeDir="false" afterPath="$PROJECT_DIR$/reddit-api/target/classes/com/upgrad/reddit/api/controller/CommentController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/reddit-api/target/classes/com/upgrad/reddit/api/controller/CommonController.class" beforeDir="false" afterPath="$PROJECT_DIR$/reddit-api/target/classes/com/upgrad/reddit/api/controller/CommonController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/reddit-api/target/classes/com/upgrad/reddit/api/controller/PostController.class" beforeDir="false" afterPath="$PROJECT_DIR$/reddit-api/target/classes/com/upgrad/reddit/api/controller/PostController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/reddit-api/target/classes/com/upgrad/reddit/api/controller/UserController.class" beforeDir="false" afterPath="$PROJECT_DIR$/reddit-api/target/classes/com/upgrad/reddit/api/controller/UserController.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/reddit-api/target/generated-sources/com/upgrad/reddit/api/model/CommentDeleteResponse.java" beforeDir="false" afterPath="$PROJECT_DIR$/reddit-api/target/generated-sources/com/upgrad/reddit/api/model/CommentDeleteResponse.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/reddit-api/target/generated-sources/com/upgrad/reddit/api/model/CommentDetailsResponse.java" beforeDir="false" afterPath="$PROJECT_DIR$/reddit-api/target/generated-sources/com/upgrad/reddit/api/model/CommentDetailsResponse.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/reddit-api/target/generated-sources/com/upgrad/reddit/api/model/CommentEditRequest.java" beforeDir="false" afterPath="$PROJECT_DIR$/reddit-api/target/generated-sources/com/upgrad/reddit/api/model/CommentEditRequest.java" afterDir="false" />
@@ -30,8 +39,16 @@
       <change beforePath="$PROJECT_DIR$/reddit-api/target/generated-sources/io/swagger/api/NotFoundException.java" beforeDir="false" afterPath="$PROJECT_DIR$/reddit-api/target/generated-sources/io/swagger/api/NotFoundException.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/reddit-api/target/generated-sources/io/swagger/configuration/SwaggerDocumentationConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/reddit-api/target/generated-sources/io/swagger/configuration/SwaggerDocumentationConfig.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/reddit-api/target/reddit-api-1.0-SNAPSHOT.jar" beforeDir="false" afterPath="$PROJECT_DIR$/reddit-api/target/reddit-api-1.0-SNAPSHOT.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/reddit-db/target/reddit-db.jar" beforeDir="false" afterPath="$PROJECT_DIR$/reddit-db/target/reddit-db.jar" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/reddit-service/src/main/java/com/upgrad/reddit/service/business/AdminBusinessService.java" beforeDir="false" afterPath="$PROJECT_DIR$/reddit-service/src/main/java/com/upgrad/reddit/service/business/AdminBusinessService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/reddit-service/src/main/java/com/upgrad/reddit/service/business/CommentBusinessService.java" beforeDir="false" afterPath="$PROJECT_DIR$/reddit-service/src/main/java/com/upgrad/reddit/service/business/CommentBusinessService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/reddit-service/src/main/java/com/upgrad/reddit/service/business/CommonBusinessService.java" beforeDir="false" afterPath="$PROJECT_DIR$/reddit-service/src/main/java/com/upgrad/reddit/service/business/CommonBusinessService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/reddit-service/src/main/java/com/upgrad/reddit/service/business/PostBusinessService.java" beforeDir="false" afterPath="$PROJECT_DIR$/reddit-service/src/main/java/com/upgrad/reddit/service/business/PostBusinessService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/reddit-service/src/main/java/com/upgrad/reddit/service/business/UserBusinessService.java" beforeDir="false" afterPath="$PROJECT_DIR$/reddit-service/src/main/java/com/upgrad/reddit/service/business/UserBusinessService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/reddit-service/target/classes/com/upgrad/reddit/service/business/AdminBusinessService.class" beforeDir="false" afterPath="$PROJECT_DIR$/reddit-service/target/classes/com/upgrad/reddit/service/business/AdminBusinessService.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/reddit-service/target/classes/com/upgrad/reddit/service/business/CommonBusinessService.class" beforeDir="false" afterPath="$PROJECT_DIR$/reddit-service/target/classes/com/upgrad/reddit/service/business/CommonBusinessService.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/reddit-service/target/classes/com/upgrad/reddit/service/business/PostBusinessService.class" beforeDir="false" afterPath="$PROJECT_DIR$/reddit-service/target/classes/com/upgrad/reddit/service/business/PostBusinessService.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/reddit-service/target/classes/com/upgrad/reddit/service/business/UserBusinessService.class" beforeDir="false" afterPath="$PROJECT_DIR$/reddit-service/target/classes/com/upgrad/reddit/service/business/UserBusinessService.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/reddit-service/target/reddit-service-1.0-SNAPSHOT.jar" beforeDir="false" afterPath="$PROJECT_DIR$/reddit-service/target/reddit-service-1.0-SNAPSHOT.jar" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -77,9 +94,10 @@
     </key>
   </component>
   <component name="RunManager" selected="Application.RedditApiApplication">
-    <configuration name="RedditApiApplication" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+    <configuration name="RedditApiApplication" type="Application" factoryName="Application" nameIsGenerated="true">
+      <option name="INCLUDE_PROVIDED_SCOPE" value="true" />
       <option name="MAIN_CLASS_NAME" value="com.upgrad.reddit.api.RedditApiApplication" />
-      <module name="redditapi" />
+      <module name="reddit-api" />
       <extension name="coverage">
         <pattern>
           <option name="PATTERN" value="com.upgrad.reddit.api.*" />
@@ -122,7 +140,6 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.RedditApiApplication" />
         <item itemvalue="JUnit.controller in redditapi" />
         <item itemvalue="JUnit.PostControllerTest.getAllPostsWithSignedOutUser" />
       </list>
@@ -142,10 +159,18 @@
     <servers />
   </component>
   <component name="WindowStateProjectService">
-    <state x="380" y="0" width="619" height="728" key="#RedditApiApplication" timestamp="1587732067103">
+    <state x="380" y="0" width="619" height="728" key="#RedditApiApplication" timestamp="1588055518905">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="380" y="0" width="619" height="728" key="#RedditApiApplication/0.0.1366.728@0.0.1366.728" timestamp="1587732067103" />
+    <state x="380" y="0" width="619" height="728" key="#RedditApiApplication/0.0.1366.728@0.0.1366.728" timestamp="1588055518905" />
+    <state x="413" y="119" key="#com.intellij.codeInsight.editorActions.RestoreReferencesDialog" timestamp="1588057425637">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state x="413" y="119" key="#com.intellij.codeInsight.editorActions.RestoreReferencesDialog/0.0.1366.728@0.0.1366.728" timestamp="1588057425637" />
+    <state x="419" y="154" key="#com.intellij.ide.util.TreeClassChooserDialog" timestamp="1588055481079">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state x="419" y="154" key="#com.intellij.ide.util.TreeClassChooserDialog/0.0.1366.728@0.0.1366.728" timestamp="1588055481079" />
     <state x="413" y="111" key="#com.intellij.refactoring.typeMigration.ui.FailedConversionsDialog" timestamp="1588051517004">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
@@ -154,22 +179,22 @@
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="463" y="119" key="FileChooserDialogImpl/0.0.1366.728@0.0.1366.728" timestamp="1587971220268" />
-    <state width="1323" height="156" key="GridCell.Tab.0.bottom" timestamp="1587971677825">
+    <state width="1323" height="152" key="GridCell.Tab.0.bottom" timestamp="1588070536124">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1323" height="156" key="GridCell.Tab.0.bottom/0.0.1366.728@0.0.1366.728" timestamp="1587971677825" />
-    <state width="1323" height="156" key="GridCell.Tab.0.center" timestamp="1587971677825">
+    <state width="1323" height="152" key="GridCell.Tab.0.bottom/0.0.1366.728@0.0.1366.728" timestamp="1588070536124" />
+    <state width="1323" height="152" key="GridCell.Tab.0.center" timestamp="1588070536124">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1323" height="156" key="GridCell.Tab.0.center/0.0.1366.728@0.0.1366.728" timestamp="1587971677825" />
-    <state width="1323" height="156" key="GridCell.Tab.0.left" timestamp="1587971677825">
+    <state width="1323" height="152" key="GridCell.Tab.0.center/0.0.1366.728@0.0.1366.728" timestamp="1588070536124" />
+    <state width="1323" height="152" key="GridCell.Tab.0.left" timestamp="1588070536124">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1323" height="156" key="GridCell.Tab.0.left/0.0.1366.728@0.0.1366.728" timestamp="1587971677825" />
-    <state width="1323" height="156" key="GridCell.Tab.0.right" timestamp="1587971677825">
+    <state width="1323" height="152" key="GridCell.Tab.0.left/0.0.1366.728@0.0.1366.728" timestamp="1588070536124" />
+    <state width="1323" height="152" key="GridCell.Tab.0.right" timestamp="1588070536124">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1323" height="156" key="GridCell.Tab.0.right/0.0.1366.728@0.0.1366.728" timestamp="1587971677825" />
+    <state width="1323" height="152" key="GridCell.Tab.0.right/0.0.1366.728@0.0.1366.728" timestamp="1588070536124" />
     <state x="389" y="121" key="refactoring.ChangeSignatureDialog" timestamp="1587885872843">
       <screen x="0" y="0" width="1366" height="728" />
     </state>

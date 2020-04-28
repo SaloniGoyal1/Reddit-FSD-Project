@@ -26,23 +26,21 @@ public class AdminBusinessService {
     @Transactional(propagation = Propagation.REQUIRED)
     public UserEntity deleteUser(String authorization, String uuid) throws AuthorizationFailedException, UserNotFoundException {
         UserAuthEntity userAuthEntity = userDao.getUserAuthByAccesstoken(authorization);
-
-        if (userAuthEntity != null) {
-            ZonedDateTime logout = userAuthEntity.getLogoutAt();
-            if (logout != null) {
+        if(userAuthEntity == null){
+            throw new AuthorizationFailedException("ATHR-001", "User has not signed in");
+        }
+        else if (userAuthEntity.getLogoutAt() != null) {
                 throw new AuthorizationFailedException("ATHR-002", "User is signed out");
-            }
+        }
+        else if(userAuthEntity.getUser().getRole().equals("admin")) {
             UserEntity userEntity = adminDao.getUserByUuid(uuid);
             if (userEntity == null) {
                 throw new UserNotFoundException("USR-001", "User with entered uuid does not exist");
-            } else {
-                String RoleName = userEntity.getRole();
-                if (!RoleName.equals("admin")) {
-                    throw new AuthorizationFailedException("ATHR-003", "Unauthorized Access,Entered user is not an admin");
-                }
             }
             return adminDao.deleteUser(userEntity);
         }
-        throw new AuthorizationFailedException("ATHR-001", "User has not signed in");
+        else {
+            throw new AuthorizationFailedException("ATHR-003", "Unauthorized Access,Entered user is not an admin");
+        }
     }
 }

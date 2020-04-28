@@ -18,4 +18,4 @@ public class RedditApiApplication {
 
 //mvn clean install -Psetup -DskipTests
 
-//http://localhost:8080/api/swagger-ui.html#!/signup-controller/signupUsingPOST
+//http://localhost:8080/api/swagger-ui.html#/
