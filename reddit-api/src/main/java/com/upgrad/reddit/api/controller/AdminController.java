@@ -18,16 +18,8 @@ public class AdminController {
     @Autowired
     private AdminBusinessService adminBusinessService;
 
-    /**
-     * A controller method to delete a user in the database.
-     *
-     * @param userId        - The uuid of the user to be deleted from the database.
-     * @param authorization - A field in the request header which contains the JWT token.
-     * @return - ResponseEntity<UserDeleteResponse> type object along with Http status OK.
-     * @throws AuthorizationFailedException
-     * @throws UserNotFoundException
-     */
-    @RequestMapping(method = RequestMethod.DELETE, path = "/admin/user/{userId}", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+    // deleteUser
+    @RequestMapping(method = RequestMethod.DELETE, path = "/user/{userId}", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     public ResponseEntity<UserDeleteResponse> deleteUser(@PathVariable("userId") final String userId, @RequestHeader("authorization") final String authorization) throws AuthorizationFailedException, UserNotFoundException {
         String [] bearerToken = authorization.split("Bearer ");
         final UserEntity userEntity = adminBusinessService.deleteUser(userId,bearerToken[0]);

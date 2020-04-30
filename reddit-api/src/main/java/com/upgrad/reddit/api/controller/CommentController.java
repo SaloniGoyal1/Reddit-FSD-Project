@@ -26,17 +26,7 @@ public class CommentController {
     @Autowired
     private CommentBusinessService commentBusinessService;
 
-    /**
-     * A controller method to post an comment to a specific post.
-     *
-     * @param commentRequest - This argument contains all the attributes required to store comment details in the database.
-     * @param postId    - The uuid of the post whose comment is to be posted in the database.
-     * @param authorization - A field in the request header which contains the JWT token.
-     * @return - ResponseEntity<CommentResponse> type object along with Http status CREATED.
-     * @throws AuthorizationFailedException
-     * @throws InvalidPostException
-     */
-
+    // createComment
     @RequestMapping (method= RequestMethod.POST, path= "/post/{postId}/comment/create" , consumes=MediaType. APPLICATION_JSON_UTF8_VALUE , produces=MediaType. APPLICATION_JSON_UTF8_VALUE )
     public ResponseEntity<CommentResponse> createComment(final CommentEntity commentRequest, @PathVariable("postId") String postId, @RequestHeader("authorization") final String authorization)throws AuthorizationFailedException, InvalidPostException{
         String [] bearerToken = authorization.split("Bearer ");
@@ -49,16 +39,7 @@ public class CommentController {
         return new ResponseEntity<CommentResponse>(commentResponse, HttpStatus.CREATED);
     }
 
-    /**
-     * A controller method to edit an comment in the database.
-     *
-     * @param commentEditRequest - This argument contains all the attributes required to store edited comment details in the database.
-     * @param commentId          - The uuid of the comment to be edited in the database.
-     * @param authorization     - A field in the request header which contains the JWT token.
-     * @return - ResponseEntity<CommentEditResponse> type object along with Http status OK.
-     * @throws AuthorizationFailedException
-     * @throws CommentNotFoundException
-     */
+    // editCommentContent
     @RequestMapping (method= RequestMethod.PUT, path= "/comment/edit/{commentId}" , consumes=MediaType. APPLICATION_JSON_UTF8_VALUE , produces=MediaType. APPLICATION_JSON_UTF8_VALUE )
     public ResponseEntity<CommentEditResponse> editCommentContent(final CommentEditRequest commentEditRequest, @PathVariable("commentId") String commentId, @RequestHeader("authorization") final String authorization)throws AuthorizationFailedException, CommentNotFoundException{
         String [] bearerToken = authorization.split("Bearer ");
@@ -69,15 +50,7 @@ public class CommentController {
         return new ResponseEntity<CommentEditResponse>(commentEditResponse, HttpStatus.OK);
     }
 
-    /**
-     * A controller method to delete an comment in the database.
-     *
-     * @param commentId      - The uuid of the comment to be deleted in the database.
-     * @param authorization - A field in the request header which contains the JWT token.
-     * @return - ResponseEntity<CommentDeleteResponse> type object along with Http status OK.
-     * @throws AuthorizationFailedException
-     * @throws CommentNotFoundException
-     */
+    // deleteComment
     @RequestMapping (method= RequestMethod.DELETE, path= "/comment/delete/{commentId}" , consumes=MediaType. APPLICATION_JSON_UTF8_VALUE , produces=MediaType. APPLICATION_JSON_UTF8_VALUE )
     public ResponseEntity<CommentDeleteResponse> deleteComment(@PathVariable("commentId") String commentId, @RequestHeader("authorization") final String authorization)throws AuthorizationFailedException, CommentNotFoundException{
         String [] bearerToken = authorization.split("Bearer ");
@@ -86,15 +59,7 @@ public class CommentController {
         return new ResponseEntity<CommentDeleteResponse>(commentDeleteResponse, HttpStatus.OK);
     }
 
-    /**
-     * A controller method to fetch all the comments for a specific post in the database.
-     *
-     * @param postId    - The uuid of the post whose comments are to be fetched from the database.
-     * @param authorization - A field in the request header which contains the JWT token.
-     * @return - ResponseEntity<List<CommentDetailsResponse>> type object along with Http status OK.
-     * @throws AuthorizationFailedException
-     * @throws InvalidPostException
-     */
+    // getAllCommentsToPost
     @RequestMapping(method = RequestMethod.GET, path = "comment/all/{postId}", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     public ResponseEntity<List<CommentDetailsResponse>> getAllCommentsToPost (@PathVariable("postId") String postId, @RequestHeader(value="authorization") final String authorization) throws AuthorizationFailedException, InvalidPostException {
         String [] bearerToken = authorization.split("Bearer ");

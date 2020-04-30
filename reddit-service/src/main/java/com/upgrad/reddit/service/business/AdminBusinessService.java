@@ -37,7 +37,9 @@ public class AdminBusinessService {
             if (userEntity == null) {
                 throw new UserNotFoundException("USR-001", "User with entered uuid does not exist");
             }
-            return adminDao.deleteUser(userEntity);
+            else {
+                return adminDao.deleteUser(userEntity);
+            }
         }
         else {
             throw new AuthorizationFailedException("ATHR-003", "Unauthorized Access,Entered user is not an admin");

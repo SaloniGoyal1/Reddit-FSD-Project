@@ -13,7 +13,7 @@ import javax.validation.constraints.*;
  * CommentEditResponse
  */
 @Validated
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2020-04-28T16:02:35.047+05:30")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2020-04-30T12:44:03.090+05:30")
 
 public class CommentEditResponse   {
   @JsonProperty("id")
