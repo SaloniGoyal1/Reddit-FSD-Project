@@ -17,7 +17,7 @@ import java.time.ZonedDateTime;
  * All the annotations which are used to specify all the constraints to the columns in the database must be correctly implemented.
  */
 @Entity
-@Table(name = "post")
+@Table(name = "post", schema = "public")
 @NamedQueries(
         {
                 @NamedQuery(name = "getAllPosts", query = "select q from PostEntity q"),
@@ -29,6 +29,7 @@ import java.time.ZonedDateTime;
 public class PostEntity {
 
     @Id
+    @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
@@ -37,12 +38,12 @@ public class PostEntity {
     @NotNull
     private String uuid;
 
-    @Column
+    @Column(name = "content")
+    @Size(max = 500)
     @NotNull
     private String content;
 
-    @Column
-    @NotNull
+    @Column(name = "date")
     private ZonedDateTime date;
 
     @ManyToOne

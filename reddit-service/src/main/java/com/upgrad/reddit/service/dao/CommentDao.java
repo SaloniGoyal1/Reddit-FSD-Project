@@ -27,7 +27,10 @@ public class CommentDao {
 
     public PostEntity getPostByUuid(String uuid) {
         try {
-            return entityManager.createNamedQuery("postByUuid", PostEntity.class).setParameter("uuid", uuid).getSingleResult();
+            return entityManager
+                    .createNamedQuery("postByUuid", PostEntity.class)
+                    .setParameter("uuid", uuid)
+                    .getSingleResult();
         } catch (NoResultException nre) {
             return null;
         }
@@ -35,8 +38,10 @@ public class CommentDao {
 
     public CommentEntity getCommentByUuid(String commentId) {
         try {
-
-            return entityManager.createNamedQuery("commentByUuid", CommentEntity.class).setParameter("uuid", commentId).getSingleResult();
+            return entityManager
+                    .createNamedQuery("commentByUuid", CommentEntity.class)
+                    .setParameter("uuid", commentId)
+                    .getSingleResult();
         } catch (NoResultException nre) {
             return null;
         }
@@ -53,7 +58,9 @@ public class CommentDao {
 
     public TypedQuery<CommentEntity> getCommentsByPost(PostEntity postEntity) {
         try {
-            return entityManager.createNamedQuery("getAllCommentsByPost", CommentEntity.class).setParameter("post", postEntity);
+            return entityManager
+                    .createNamedQuery("getAllCommentsByPost", CommentEntity.class)
+                    .setParameter("post", postEntity);
         } catch (NoResultException nre) {
             return null;
         }

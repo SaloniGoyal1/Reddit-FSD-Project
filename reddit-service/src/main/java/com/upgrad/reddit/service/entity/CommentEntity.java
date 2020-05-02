@@ -17,7 +17,7 @@ import java.time.ZonedDateTime;
         @NamedQuery(name = "getAllCommentsByPost", query = "select a from CommentEntity a where a.post = :post")
 })
 @Entity
-@Table(name = "COMMENT")
+@Table(name = "COMMENT", schema = "public")
 public class CommentEntity {
 
     @Id
@@ -29,13 +29,12 @@ public class CommentEntity {
     @NotNull
     private String uuid;
 
-
-    @Column
+    @Column(name = "comment")
+    @Size(max = 255)
     @NotNull
     private String comment;
 
-    @Column
-    @NotNull
+    @Column(name = "date")
     private ZonedDateTime date;
 
     @ManyToOne

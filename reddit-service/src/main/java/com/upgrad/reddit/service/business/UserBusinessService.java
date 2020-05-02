@@ -13,8 +13,7 @@ import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.ZonedDateTime;
-import java.util.UUID;
-import java.time.ZonedDateTime;
+
 @Service
 public class UserBusinessService {
 
@@ -29,16 +28,19 @@ public class UserBusinessService {
      */
     @Transactional(propagation = Propagation.REQUIRED)
     public UserEntity signup(UserEntity userEntity) throws SignUpRestrictedException {
-//        String[] encryptedText = passwordCryptographyProvider.encrypt(userEntity.getPassword());
-//        userEntity.setSalt(encryptedText[0]);
-//        userEntity.setPassword(encryptedText[1]);
-
-        if (userDao.getUserByUsername(userEntity.getUserName()) != null) {
+        UserEntity userNameEntity = userDao.checkUserName(userEntity.getUserName());
+        UserEntity emailEntity = userDao.checkEmailid(userEntity.getEmail());
+        // Go for user creation only if username are unique
+        if (userNameEntity != null && userEntity.getUserName().equals(userNameEntity.getUserName())) {
             throw new SignUpRestrictedException("SGR-001", "Try any other Username, this Username has already been taken");
         }
-        if (userDao.getUserByEmail(userEntity.getEmail()) != null) {
+        // Go for user creation only if email id are unique
+        if (emailEntity != null && userEntity.getEmail().equals(emailEntity.getEmail())) {
             throw new SignUpRestrictedException("SGR-002", "This user has already been registered, try with any other emailId");
         }
+        String[] encryptedText = passwordCryptographyProvider.encrypt(userEntity.getPassword());
+        userEntity.setSalt(encryptedText[0]);
+        userEntity.setPassword(encryptedText[1]);
         return userDao.createUser(userEntity);
     }
 
@@ -51,35 +53,40 @@ public class UserBusinessService {
         if (userEntity == null) {
             throw new AuthenticationFailedException("ATH-001", "This username does not exist");
         }
-        if (password.equals(userEntity.getPassword())){
-            JwtTokenProvider jwtTokenProvider = new JwtTokenProvider(password);
-            UserAuthEntity userAuthEntity = new UserAuthEntity();
-            userAuthEntity.setUser(userEntity);
+        String encryptedPwd = passwordCryptographyProvider.encrypt(password, userEntity.getSalt());
+        if (encryptedPwd.equals(userEntity.getPassword())) {
+            JwtTokenProvider tokenProvider = new JwtTokenProvider(encryptedPwd);
+            UserAuthEntity userAuthToken = new UserAuthEntity();
+            userAuthToken.setUser(userEntity);
             final ZonedDateTime now = ZonedDateTime.now();
             final ZonedDateTime expiresAt = now.plusHours(8);
-
-            userAuthEntity.setAccessToken(jwtTokenProvider.generateToken(userEntity.getUuid(), now, expiresAt));
-            userAuthEntity.setLoginAt(now);
-            userAuthEntity.setExpiresAt(expiresAt);
-            userAuthEntity.setUuid(UUID.randomUUID().toString());
-            userDao.createUserAuth(userAuthEntity);
-            userDao.updateUserAuth(userAuthEntity);
-            return userAuthEntity;
-        }
-        else{
+            userAuthToken.setAccessToken(tokenProvider.generateToken(userEntity.getUuid(), now, expiresAt));
+            userAuthToken.setLoginAt(now);
+            userAuthToken.setExpiresAt(expiresAt);
+            userAuthToken.setUuid(userEntity.getUuid());
+            userDao.createUserAuth(userAuthToken);
+            userAuthToken.setLogoutAt(null);
+            return userAuthToken;
+        } else {
             throw new AuthenticationFailedException("ATH-002", "Password failed");
         }
     }
 
     /**
      * The method implements the business logic for signout endpoint.
+     * @return
      */
     @Transactional(propagation = Propagation.REQUIRED)
-    public UserAuthEntity signout(String authorization) throws SignOutRestrictedException {
+    public UserEntity signout(String authorization) throws SignOutRestrictedException {
         UserAuthEntity userAuthEntity = userDao.getUserAuthByAccesstoken(authorization);
         if(userAuthEntity == null){
             throw new SignOutRestrictedException("SGR-001", "User is not Signed in");
         }
-        return userDao.signOut(userAuthEntity);
+        else {
+            final ZonedDateTime logoutAtDate = ZonedDateTime.now();
+            userAuthEntity.setLogoutAt(logoutAtDate);
+            userDao.updateUserAuth(userAuthEntity);
+            return userAuthEntity.getUser();
+        }
     }
 }

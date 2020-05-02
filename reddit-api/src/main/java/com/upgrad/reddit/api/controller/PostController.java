@@ -40,18 +40,17 @@ public class PostController {
 
     // getAllPosts
     @RequestMapping(method = RequestMethod.GET, path = "/all", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
-    public ResponseEntity<List<PostDetailsResponse>> getAllPosts (@RequestHeader(value="authorization") final String authorization) throws AuthorizationFailedException {
+    public ResponseEntity<PostDetailsResponse> getAllPosts (@RequestHeader(value="authorization") final String authorization) throws AuthorizationFailedException {
         String [] bearerToken = authorization.split("Bearer ");
-        TypedQuery<PostEntity> postList = postBusinessService.getPosts(bearerToken[0]);
-        List<PostEntity> resultList = postList.getResultList();
-        List<PostDetailsResponse> responseList = resultList.stream()
-                .map(post -> {
-                    PostDetailsResponse response = new PostDetailsResponse();
-                    response.setContent(post.getContent());
-                    response.setId(post.getUuid());
-                    return response;
-                }).collect(Collectors.toList());
-        return new ResponseEntity<>(responseList, HttpStatus.OK);
+        List<PostEntity> postEntityList = (List<PostEntity>) postBusinessService.getPosts(bearerToken[0]);
+        StringBuilder builder = new StringBuilder();
+        getContentsString(postEntityList, builder);
+        StringBuilder uuIdBuilder = new StringBuilder();
+        getUuIdString(postEntityList, uuIdBuilder);
+        PostDetailsResponse postDetailsResponse = new PostDetailsResponse()
+                .id(uuIdBuilder.toString())
+                .content(builder.toString());
+        return new ResponseEntity<PostDetailsResponse>(postDetailsResponse, HttpStatus.OK);
     }
 
     // editPostContent
@@ -65,7 +64,7 @@ public class PostController {
             return new ResponseEntity<PostEditResponse>(postEditResponse, HttpStatus.OK);
         }
 
-        //deletePost
+        // deletePost
     @RequestMapping (method= RequestMethod.DELETE, path= "/delete/{postId}" , consumes=MediaType. APPLICATION_JSON_UTF8_VALUE , produces=MediaType. APPLICATION_JSON_UTF8_VALUE )
     public ResponseEntity<PostDeleteResponse> deletePost (@PathVariable("postId") String postId, @RequestHeader("authorization") final String authorization)throws AuthorizationFailedException, InvalidPostException{
         String [] bearerToken = authorization.split("Bearer ");
@@ -81,5 +80,20 @@ public class PostController {
         final PostEntity postEntity = (PostEntity) postBusinessService.getPostsByUser(userId, bearerToken[0]);
         PostDetailsResponse postDetailsResponse = new PostDetailsResponse().id(postEntity.getUuid()).content(postEntity.getContent());
         return new ResponseEntity<List<PostDetailsResponse>>((List<PostDetailsResponse>) postDetailsResponse, HttpStatus.OK);
+    }
+
+
+    public static final StringBuilder getUuIdString(List<PostEntity> postEntityList, StringBuilder uuIdBuilder) {
+        for (PostEntity postObject : postEntityList) {
+            uuIdBuilder.append(postObject.getUuid()).append(",");
+        }
+        return uuIdBuilder;
+    }
+
+    public static final StringBuilder getContentsString(List<PostEntity> postEntityList, StringBuilder builder) {
+        for (PostEntity postObject : postEntityList) {
+            builder.append(postObject.getContent()).append(",");
+        }
+        return builder;
     }
 }

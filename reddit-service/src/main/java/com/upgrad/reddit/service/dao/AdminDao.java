@@ -16,12 +16,13 @@ public class AdminDao {
     @PersistenceContext
     private EntityManager entityManager;
 
-
+    // Method used for deletion of user from database.
     public UserEntity deleteUser(UserEntity userEntity) {
         entityManager.remove(userEntity);
         return userEntity;
     }
 
+    // method to get user Entity by uuid.
     public UserEntity getUserByUuid(String uuid) {
         try {
             return entityManager.createNamedQuery("userByUuid", UserEntity.class).setParameter("uuid", uuid).getSingleResult();
@@ -29,6 +30,4 @@ public class AdminDao {
             return null;
         }
     }
-
-
 }

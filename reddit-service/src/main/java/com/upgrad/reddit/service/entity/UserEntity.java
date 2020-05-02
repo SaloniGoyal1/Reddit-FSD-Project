@@ -21,36 +21,40 @@ import javax.validation.constraints.Size;
 
 public class UserEntity {
 
-
     @Id
+    @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-
-    @Column(name = "UUID")
-    @Size(max = 64)
+    @Column(name = "uuid")
+    @Size(max = 200)
     @NotNull
     private String uuid;
 
 
     @Column(name = "FIRST_NAME")
     @NotNull
+    @Size(max = 30)
     private String firstName;
 
     @Column(name = "LAST_NAME")
     @NotNull
+    @Size(max = 30)
     private String lastName;
 
     @Column(name = "USERNAME", unique = true)
     @NotNull
+    @Size(max = 30)
     private String userName;
 
     @Column(name = "EMAIL", unique = true)
     @NotNull
+    @Size(max = 50)
     private String email;
 
     @Column(name = "PASSWORD", nullable = false)
     @ToStringExclude
+    @Size(max = 255)
     private String password;
 
     @Column(name = "SALT")
@@ -59,18 +63,23 @@ public class UserEntity {
     private String salt;
 
     @Column(name = "COUNTRY")
+    @Size(max = 30)
     private String country;
 
     @Column(columnDefinition = "TEXT", name = "ABOUT_ME")
+    @Size(max = 50)
     private String aboutMe;
 
     @Column(name = "DOB")
+    @Size(max = 30)
     private String dob;
 
     @Column(name = "ROLE")
+    @Size(max = 30)
     private String role;
 
     @Column(name = "CONTACT_NUMBER")
+    @Size(max = 30)
     private String contactNumber;
 
     public Integer getId() {
