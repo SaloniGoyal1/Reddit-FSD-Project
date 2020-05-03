@@ -13,7 +13,6 @@ public class RedditApiApplication {
     }
 }
 
-
 // mvn clean install -DskipTests
 
 //mvn clean install -Psetup -DskipTests
